@@ -123,7 +123,11 @@
 		.searchbtn{
 			padding:8px;
 			border:none;
+<<<<<<< HEAD
 			background: #000;
+=======
+			background: #000;	
+>>>>>>> 37b7de7e1478f2e33e9f23900cc9521026a98fbf
 			margin:0px;
 		}
 		.searchbtn:hover{
@@ -156,6 +160,7 @@
     .input-table-form {border: 5px solid white}
     .input-table table {border: solid black 2px}
     .input-table td {border: solid white 2px}
+<<<<<<< HEAD
 
     .button-table {}
     .button-table td {border: solid white 5px; background: white;}
@@ -164,6 +169,16 @@
 
     .body {border: solid white 5px;}
 
+=======
+    
+    .button-table {}
+    .button-table td {border: solid white 5px; background: white;}
+    
+    .book-information-box {border: solid white 5px; padding: 10px; background: white; height: 19px}
+    
+    .body {border: solid white 5px;}
+    
+>>>>>>> 37b7de7e1478f2e33e9f23900cc9521026a98fbf
     .div-book-table {padding: 5px;}
     .book-table table {border: solid white 5px; background:white; padding: 20px}
     .book-table th {border: solid black 1px; background:white; width: 150px}
@@ -179,10 +194,18 @@
           <div class="top">
             <li>
               <a href="">account<i class="fa fa-sort-down"></i></a>
+<<<<<<< HEAD
             </li>
             <div class="drop">
               <li><a href="/admin">main page</a></li>
               <li><a href="/signout">sign out</a></li>
+=======
+            </li> 
+            <div class="drop">
+              <li><a href="./adminMainPage.htm">main page</a></li>
+              <li><a href="">settings</a></li>
+              <li><a href="">sign out</a></li>
+>>>>>>> 37b7de7e1478f2e33e9f23900cc9521026a98fbf
             </div>
           </div>
         </ul>
@@ -193,6 +216,7 @@
 	<div id="container" align="center">
 	  <h1>Book Database</h1>
   </div>
+<<<<<<< HEAD
 <form action="/admin" method="POST">
   <table class="input-table" id="input-table">
     <tr>
@@ -224,10 +248,35 @@
       <td><input name="pic_url" placeholder="Enter Pic url"></td>
       <td class="input-table-form"><b>Price:</b></td>
       <td><input name="price" placeholder="Enter Price"></td>
+=======
+  <table class="input-table" id="input-table">
+    <tr>
+      <td class="input-table-form"><b>Title:</b></td>
+      <td><input id="Title" placeholder="Enter Title"></td>
+      <td class="input-table-form"><b>Publisher:</b></td>
+      <td><input id="Publisher" placeholder="Enter Publisher"></td>
+    </tr>
+    <tr>
+      <td class="input-table-form"><b>ISBN #:</b></td>
+      <td><input id="ISBN" placeholder="Enter ISBN #"></td>
+      <td class="input-table-form"><b>Genre:</b></td>
+      <td><input id="Genre" placeholder="Enter Genre"></td>
+    </tr>
+    <tr>
+      <td class="input-table-form"><b>Author:</b></td>
+      <td><input id="Author" placeholder="Enter Author"></td>
+      <td class="input-table-form"><b>Stock:</b></td>
+      <td><input id="Stock" placeholder="Enter Stock"></td>
+    </tr>
+    <tr>
+      <td class="input-table-form"><b>Vendor:</b></td>
+      <td><input id="Vendor" placeholder="Enter Vendor"></td>
+>>>>>>> 37b7de7e1478f2e33e9f23900cc9521026a98fbf
     </tr>
   </table>
   <table class="button-table" id="button-table">
     <tr>
+<<<<<<< HEAD
       <input type="radio" name="radiobutton" value="add" checked="checked"> Add book
       <input type="radio" name="radiobutton" value="delete"> Delete Book
       <input type="radio" name="radiobutton" value="update"> Update Book
@@ -237,5 +286,29 @@
   </form>
 </body>
 <foot>
+=======
+      <td> <button onclick="addBook()"> Add Book </button> </td>
+      <td> <button onclick="deleteBook()"> Delete Book </button> </td>
+      <td> <button onclick="selectBook()"> Select Book </button> </td>
+      <td> <button onclick="updateBook()"> Update Book </button> </td>
+      <td> <button onclick="addRndBooks()"> Add Random Book </button> </td>
+    </tr>
+  </table>
+  <div class="book-information-box" id="changeMe">Book Information</div>
+  <div class="div-book-table">
+    <table class="book-table" id="book-table">
+      <th>Title</th>
+      <th>ISBN #</th>
+      <th>Author</th>
+      <th>Vendor</th>
+      <th>Publisher</th>
+      <th>Genre</th>
+      <th>Stock</th>
+    </table>
+  </div>
+</body>
+<foot>
+  <script src="manageBooks.js" defer></script>
+>>>>>>> 37b7de7e1478f2e33e9f23900cc9521026a98fbf
 </foot>
 </html>

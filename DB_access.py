@@ -25,5 +25,3 @@ def select(query): #for retrieving info
     numrows = len(rows)
     mysql_connection.close()
     return [rows,numrows]
-
-

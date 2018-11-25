@@ -36,4 +36,3 @@ def getItems(user):
         j=j+1
     #assigns list of dicts with information of books in the cart
     return info #return the list
-
