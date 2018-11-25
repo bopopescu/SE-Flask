@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Profile</title>
+
+<style>
+
+
+
+    body {
+
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+        background: lightgrey
+
+    }
+
+
+
+    img {
+
+        border-radius: 50%;
+
+        width:200px;
+
+    }
+
+
+
+    h1 {
+
+        font-weight: 500;
+
+    }
+
+    h2 {
+
+        display: inline;
+
+        font-weight: 300;
+
+    }
+
+
+
+    button {
+
+        padding-top: 5px;
+
+        padding-bottom: 5px;
+
+        border: none;
+
+        background: #353837;
+
+        color: white
+
+    }
+
+
+
+    .info {
+
+        padding-bottom: 10px
+
+    }
+
+
+
+    .box {
+
+        margin-top: 100px;
+
+        background:white;
+
+        width: 500px;
+
+        height: 500px;
+
+        padding: 70px;
+
+        margin-left: auto;
+
+        margin-right: auto;
+
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    }
+
+
+
+    .editbtn {
+
+        box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    }
+
+
+
+    .changebtn {
+
+        box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    }
+
+
+
+    .deletebtn {
+
+        box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    }
+
+
+
+    .book {
+
+        display:inline-block;
+
+        vertical-align:middle;
+
+        font-size:2em;
+
+        font-weight:bold;
+
+    }
+
+
+
+    .worm {
+
+        display:inline-block;
+
+        vertical-align:middle;
+
+        font-family:georgia;
+
+        font-style:italic;
+
+        font-size:2em;
+
+        padding:3px;
+
+        background:#fff;
+
+        top:0px;
+
+    }
+
+
+
+    .header{
+
+        position:fixed;
+
+        top:0px;
+
+        left:0px;
+
+        padding:10px;
+
+        width:100%;
+
+        height:6%;
+
+        z-index:1;
+
+        background:#dfdfdf;
+
+        overflow:none;
+
+        font-size:0.9em;
+
+        font-family:helvetica;
+
+        border-bottom:15px white solid;
+
+    }
+
+
+
+</style>
+
+</head>
+
+<body>
+
+
+
+<div class = header>
+
+<span class="book"><a href="/">BOOK</a></span>
+<span class="worm">Worm</span>
+
+</div>
+
+
+
+
+
+<div class = box>
+
+<h1 align = "center">Your Profile</h1>
+
+
+
+<div align = "center" class = profileImg>
+
+    <img src = "http://showbizy-dev.cygnismedia.com/images/default-user.png" alt = "Avatar">
+
+</div>
+
+<br>
+
+
+
+
+
+<div id="div1" align = "center" class = info>
+
+    <h2 id="f1">{{details['username']}}</h2>
+
+    <br>
+
+    <h2 id="f2">{{details['name']}}</h2>
+
+    <br>
+
+    <h2 id="f4">{{details['email']}}</h2>
+
+</div>
+
+
+
+    <div id="div2" align = "center" class = info style="display: none;">
+
+    <p><label>Old password:</label>
+
+           <input type="password" id="myPwd">
+
+        <br>
+
+        <label>New password:</label>
+
+           <input type="password" id="myPwd2">
+
+        </p>
+
+     <input type="checkbox" onclick="showPwd()">Show Passwords
+
+
+
+
+
+
+
+    </div>
+
+
+
+<br>
+
+
+
+<div align = "center" class = help>
+
+    <button type = "submit" class = "editbtn" id="btn1" onclick="editText()">Edit Profile</button>
+
+    <button type = "submit" class = "changebtn" id="btn2" onclick="changePwd()">Change Password</button>
+
+    <button type = "submit" class = "deletebtn">Delete Account</button>
+
+</div>
+
+
+
+
+
+    <script>
+
+    function editText() {
+
+        document.getElementById("f1").contentEditable = true
+
+         document.getElementById("f2").contentEditable = true
+
+         document.getElementById("f4").contentEditable = true
+
+        if(document.getElementById("btn1").innerHTML=="Edit Profile")
+
+            document.getElementById("btn1").innerHTML = "Save Changes"
+
+        else {
+
+            document.getElementById("btn1").innerHTML = "Edit Profile"
+
+            document.getElementById("f1").contentEditable = false
+
+            document.getElementById("f2").contentEditable = false
+
+            document.getElementById("f4").contentEditable = false
+
+        }
+
+    }
+
+
+
+    function changePwd() {
+
+         var x = document.getElementById("div1");
+
+        var y = document.getElementById("div2");
+
+        if (y.style.display === "none" && document.getElementById("btn2").innerHTML == "Change Password") {
+
+             document.getElementById("btn2").innerHTML = "Save Changes"
+
+            x.style.display = "none";
+
+            y.style.display = "block";
+
+        } else {
+
+            document.getElementById("btn2").innerHTML = "Change Password"
+
+            x.style.display = "block";
+
+            y.style.display = "none"
+
+        }
+
+    }
+
+
+
+    function showPwd() {
+
+        var x = document.getElementById("myPwd");
+
+        var y = document.getElementById("myPwd2");
+
+        if (x.type === "password") {
+
+            x.type = "text";
+
+            y.type = "text";
+
+        } else {
+
+            x.type = "password";
+
+            y.type = "password";
+
+        }
+
+}
+
+</script>
+</div>
+</body>
+
+</html>

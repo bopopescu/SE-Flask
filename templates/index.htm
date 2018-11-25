@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <title>Home</title>
+
+<link rel="stylesheet" href="http://jsmalls128.pythonanywhere.com/static/homeStyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body onload= "loading(); checkCookie();">
+<div id = "loadWin" class = "modal">
+    <div class = "modal-content">
+    <div align = "center"> <img src = "https://images.emojiterra.com/mozilla/512px/1f41b.png" class = "wormImg"></div>
+    <br><br>
+    <div id = "bar">
+        <div id = "load"></div>
+    </div>
+    </div>
+</div>
+<div id="nav">
+
+  <span class="book"><a href="/" style="padding:0px 0px 0px 0px; color:black; background:none;">BOOK</a></span>
+
+  <span class="worm">Worm</span>
+
+  <span class = "book"><img src = "https://images.emojiterra.com/mozilla/512px/1f41b.png" class = "wormImg"></span>
+
+  <div class="search">
+
+    <form class="rad" action="/search" method="POST">
+
+      <input type="radio" name="radiobutton" value="isbn" checked="checked"> ISBN
+
+      <input type="radio" name="radiobutton" value="title"> Title
+
+      <input type="radio" name="radiobutton" value="author"> Author
+
+      <input type="radio" name="radiobutton" value="subject"> Subject
+
+      <input type="text" required class="searchbar"  name="search" placeholder="Search...">
+
+      <button type="submit" class="searchbtn" value="Submit">
+
+      <i class="fa fa-search"></i>
+
+      </button>
+
+    </form>
+
+  </div>
+
+  <div class="menu">
+
+    <a href="./cart">cart({{count}}) <i class="fa fa-shopping-cart"></i></a>
+
+    <a href="checkoutproto.htm">checkout</a>
+
+    <ul>
+
+      <div class="top">
+
+        <li><a href="static/index.html" id="acct">{{user}}</a><i class="fa fa-sort-down"></i></li>
+
+        <div class="drop">
+
+          <li><a href="/profile" id="settings" >settings</a></li>
+
+          <li><a href="/login" id="Sign-in" onclick="logout('username')">{{log}}</a></li>
+
+        </div>
+
+      </div>
+
+    </ul>
+
+  </div>
+
+</div>
+
+<div class="filler"></div>
+  <div class="clearfix">
+
+  {% for president in p:%}
+
+    <div class="img-container">
+
+      <a href=http://jsmalls128.pythonanywhere.com/b/?book={{president['isbn']}}>
+
+      <img src ={{president['pic_url']}} width ="200" height="300" style="width:100%;max-width:200px"></a><br>{{president['title']}}<br>{{president['author']}}<br>
+
+      <p class = price style="float:left;">${{president['price']}}</p>
+
+    </div>
+
+    {% endfor%}
+
+</div>
+<script>
+
+function checkCookie() {
+    account = document.getElementById("Sign-in");
+    account = account.innerHTML
+    console.log(account)
+    var compare = 'Logout';
+    if(account == compare){
+      var signInEle = document.getElementById("Sign-in");
+      signInEle.href="http://jsmalls128.pythonanywhere.com/signout";
+      }
+}
+function loading() {
+
+    var modal = document.getElementById("loadWin")
+
+    modal.style.display = "block";
+
+    var elem = document.getElementById("load");
+
+    var width = 1;
+
+    var id = setInterval(frame, 10);
+
+    function frame() {
+
+        if (width >= 100) {
+
+            clearInterval(id);
+
+            modal.style.display = "none";
+
+        }
+
+        else {
+
+            width++;
+
+            elem.style.width = width + '%';
+
+        }
+
+    }
+
+  }
+</script>
+</body>
+</html>
