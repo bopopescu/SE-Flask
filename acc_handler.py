@@ -22,3 +22,5 @@ def handle_acc(case,data):
         ap.update_pass(data)
     elif case == 'changeinfo':
         ap.update_info(data)
+    elif case == 'subscribe':
+        ap.update_info(data)

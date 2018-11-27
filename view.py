@@ -112,12 +112,18 @@ def profile():
 
 @app.route('/profile/<action>',methods=['GET','POST'])
 def profilechange(action):
+    data = request.form.copy()
     if (action=='passwd'):
-        valid = handle_acc('login',request.form.copy())
+        valid = handle_acc('login',data)
         if(valid):
-            handle_acc('changepass',request.form.copy())
-            resp = redirect("/profile")
-        return resp
+            handle_acc('changepass',data)
+            return redirect("/profile")
+    elif (action=='info'):
+        handle_acc('changeinfo', data)
+        return redirect("/profile")
+    elif (action=='sub'):
+        handle_acc('subscribe',)
+        return redirect("/profile")
     else:
         return redirect("/login")
 
