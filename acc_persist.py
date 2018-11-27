@@ -47,6 +47,19 @@ def rmv_user(data):
     db.update(query)
 #called by admin to delete accounts
 
+def update_pass(data):
+    username = data['user']
+    password = data['newpasswd']
+    query = "UPDATE accounts SET password = '"+ password +"' WHERE username='"+ username + "'"
+    db.update(query)
+
+def update_info(data):
+    username = data['user']
+    email = data['email']
+    name = data['name']
+    query = "UPDATE accounts SET password = '"+ password +"', email = '" + email + "',name=  '"+ name +"', WHERE username='"+ username + "'"
+    db.update(query)
+
 def update_user(data): #contains dict of all user attributes?
     name = data['name']
     email = data['email']

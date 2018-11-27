@@ -18,3 +18,7 @@ def handle_acc(case,data):
         ap.rmv_user(data)
     elif case == 'update':
         ap.update_user(data)
+    elif case == 'changepass':
+        ap.update_pass(data)
+    elif case == 'changeinfo':
+        ap.update_info(data)

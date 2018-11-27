@@ -60,21 +60,22 @@
     <div class = "modal-content">
         <span class = "close" onclick = "closeWin()"> &times;
         <form action="/profile/passwd" method="post">
-        </span>
-        <br><br><br>
-        <h2>Change Password</h2>
-        <br><br><br>
-        <p>Old Password: </p>
-        <br><br>
-        <input type = "password" name="currentpasswd" id = "myPwd">
-        <br><br>
-        <p>New Password: </p>
-        <br><br>
-        <input type = "password" name="newpasswd" id = "myPwd2">
-        <br><br><br>
-        <input type="checkbox" onclick="showPwd()"><p>Show Characters</p>
-        <br><br><br>
-        <button type = "submit">Submit</button>
+            </span>
+            <br><br><br>
+            <h2>Change Password</h2>
+            <br><br><br>
+            <p>Old Password: </p>
+            <br><br>
+            <input type = "hidden" name="user" value="{{details.get("username")}}">
+            <input type = "password" name="pass" id = "myPwd">
+            <br><br>
+            <p>New Password: </p>
+            <br><br>
+            <input type = "password" name="newpasswd" id = "myPwd2">
+            <br><br><br>
+            <input type="checkbox" onclick="showPwd()"><p>Show Characters</p>
+            <br><br><br>
+            <button type = "submit">Submit</button>
         </form>
         <div class = "divider"></div>
         <button type = "submit" onclick = "closeWin()">Cancel</button>
