@@ -34,17 +34,11 @@ def bookview():
 def register():
     if(request.method == 'POST'):
         acc = handle_acc('register',request.form.copy())
+        if(acc == 1):
+            return render_template('register.htm',error="This username has already been taken!")
         return redirect("/")
     else:
-        return render_template('register.htm')
-    output = open(r'D:\bookworm\static\registrationConfirmation.htm')
-    output = output.read()
-    acc = handle_acc('register',request.form.copy())
-    output += '<h1>' + acc  + '</h1>'
-    if request.method == 'POST':
-        return output
-    else:
-        return output
+        return render_template('register.htm',error="")
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -81,14 +75,10 @@ def viewcart():
     else:
         if int(request.cookies.get('count')) != 0:
             item,sub = ch.handle_cart('view',request.cookies.get('username'))
-        #generate template
-            template = Template(filename=r'D:\bookworm\templates\cart.htm')
-            resp = make_response(template.render(count=request.cookies.get('count'),items=item,subtotal=sub))
             resp =  render_template('cart.htm',count=request.cookies.get('count'),items=item,subtotal=sub)
+        #if no items in cart
         else:
             resp = redirect("static/cartproto.htm")
-        #if no items in cart
-        #display message 'No items in cart' or smt
     return resp
 
 @app.route('/search',methods=['GET','POST'])
@@ -112,7 +102,6 @@ def profile():
         return resp
     else:
         return redirect("/login")
-
 
 @app.route('/b/',methods=['GET','POST'])
 def selBook():

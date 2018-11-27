@@ -134,7 +134,7 @@ button:hover{
 .searchbtn{
 	padding:8px;
 	border:none;
-	background: #000;	
+	background: #000;
 	margin:0px;
 }
 .searchbtn:hover{
@@ -171,7 +171,7 @@ button:hover{
 	border: solid #fff 20px;
 	background:#fff;
 	border-spacing:1px;
-	border-radius:10px;	
+	border-radius:10px;
 	text-align:center;
 }
 
@@ -234,21 +234,21 @@ button:hover{
         <a href="/" class="book">BOOKWORM</a>
 		<div class="search">
 			<form class="rad" action="/search" method="post">
-	    		<input type="radio" name="cat" value="isbn" checked="checked"></input> ISBN 
-				<input type="radio" name="cat" value="title"></input> Title 
+	    		<input type="radio" name="cat" value="isbn" checked="checked"></input> ISBN
+				<input type="radio" name="cat" value="title"></input> Title
 				<input type="radio" name="cat" value="author"></input> Author
 				<input type="radio" name="cat" value="subject"></input> Subject
-			
+
 			<input type="text" class="searchbar"  name="search" placeholder="Search..."></input><button type="submit" class="searchbtn"><i class="fa fa-search"></i></button> </form>
 		</div>
 		<div class="menu">
-			<a href="/cart">cart (${count}) <i class="fa fa-shopping-cart"></i></a>
+			<a href="/cart">cart ({{count}}) <i class="fa fa-shopping-cart"></i></a>
 			<a href="/checkout">checkout</a>
 		<ul>
 			<div class="top">
-				<li><a href="/profile">account <i class="fa fa-sort-down"></i></a></li> 
+				<li><a href="/profile">account <i class="fa fa-sort-down"></i></a></li>
 				<div class="drop">
-					<li><a href="">settings</a></li>
+					<li><a href="/profile">settings</a></li>
 					<li><a href="/signout">sign out</a></li>
 				</div>
 			</div>
@@ -256,30 +256,35 @@ button:hover{
 		</div>
 	</div>
 <div class="filler"></div>
-
 <div id="container" align="center">
 <h1>Cart</h1>
-
 <table class="items">
-<tr>
-<th name="img"></th>
-<th>Item</th>
-<th>Qty</th>
-<th>Price</th>
-<th>Total</th>
-
-</tr>
-% for item in items:
-<tr>
-<td><img src="${item['pic_url']}" class="tbimg"/></td> <td>${item['title']}<br/><sup>${item['author']}</sup></td><td>
-<form action="" method="post"><input type="hidden" name="isbn" value="${item['isbn']}"/><input type="text" name="qty" value="${item['qty']}" size="1"/><button type="submit"><i class="fa fa-check"></i></button></form></td><td>${item['price']}</td><td>${item['total']}</td>
-</tr>
-%endfor
-</table><br/>
+    <tr>
+        <th name="img"></th>
+        <th>Item</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Total</th>
+    </tr>
+    {% for item in items:%}
+        <tr>
+        <td><img src="{{item['pic_url']}}" class="tbimg"/></td> <td>{{item['title']}}<br/><sup>{{item['author']}}</sup></td><td>
+            <form action="" method="post">
+                <input type="hidden" name="isbn" value="{{item['isbn']}}"/>
+                <input type="text" name="qty" value="{{item['qty']}}" size="1"/>
+                <button type="submit"><i class="fa fa-check"></i></button>
+                </form>
+            </td>
+            <td>{{items['price']}}</td>
+            <td>{{item['total']}}</td>
+    </tr>
+    {%endfor%}
+</table>
+<br/>
 <table>
-<tr><td><b>Subtotal:</b></td><td> ${subtotal}</td></tr>
-</table><hr/>
-
+    <tr><td><b>Subtotal:</b></td><td> ${{subtotal}}</td></tr>
+</table>
+<hr/>
 <a href="/"><button>Continue Browsing</button></a> | <a href="/checkout"><button>Check out >></button></a>
 </div>
 </body>

@@ -3,8 +3,10 @@ import DB_access as db
 def getNumItems(user): #used to set number in cookie to show beside the cart link in nav bar
     query = "select count(cust_id) from cart where cust_id='{}' group by cust_id".format(user)
     inf = db.select(query)
+    number = 'count(cust_id)'.encode('ASCII')
     if inf[1] != 0: #check if any tuples were returned
-        return inf[0][0]['count(cust_id)']
+        return inf[0][0].get(number)
+
     else:
         return 0 #if no items in cart
 #returns number of items in cart

@@ -1,11 +1,16 @@
 import DB_access as db
 
 def register(acc):
-    query = "insert into accounts(name,email,birthdate,username,password,acct_type) values ('{}','{}','{}','{}','{}','{}')".format(acc.name,acc.email,acc.date,acc.user,acc.passw,acc.type)
-    db.update(query)
-    query = "insert into address(add_line_1,add_line_2,state,zip,cust_id,city) values ('{}','{}','{}','{}','{}','{}')".format(acc.addr.ad1,acc.addr.ad2,acc.addr.st,acc.addr.zip,acc.user,acc.addr.city)
-    db.update(query)
-    return query
+    query = "select * from accounts where username='{}' and password='{}'".format(acc.name,acc.passw)
+    num = db.select(query)[1]#returns number of tuples found by query
+    if(num == 0):
+        query = "insert into accounts(name,email,birthdate,username,password,acct_type) values ('{}','{}','{}','{}','{}','{}')".format(acc.name,acc.email,acc.date,acc.user,acc.passw,acc.type)
+        db.update(query)
+        query = "insert into address(add_line_1,add_line_2,state,zip,cust_id,city) values ('{}','{}','{}','{}','{}','{}')".format(acc.addr.ad1,acc.addr.ad2,acc.addr.st,acc.addr.zip,acc.user,acc.addr.city)
+        db.update(query)
+    else:
+        num = 1
+    return num
 #worthless if you're not using the domain classes
 #can also be called by an admin who is adding a user
 

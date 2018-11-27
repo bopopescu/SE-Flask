@@ -265,6 +265,10 @@ button:hover{
     <b>ISBN:</b> {{details['isbn']}} | <b>Left in stock:</b> {{details['amount']}} | <b>Subject:</b> {{details['subject']}}<hr/><br/>
     {{details['detail']}}
   </div>
+    <form class="rad" action="" method="POST">
+	    <input type="radio" name="isbn" checked="checked" style="display:none" value="{{details['isbn']}}">
+	    <input type="submit" value="Add to cart">
+	   </form>
   <script>
   function checkCookie() {
     account = document.getElementById("Sign-in");
