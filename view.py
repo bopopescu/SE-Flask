@@ -61,6 +61,13 @@ def signout():
     resp.set_cookie('username', '', expires=0)
     return resp
 
+@app.route('/delete',methods=['POST'])
+def delete():
+    data = request.form.copy()
+    handle_acc('delete',data)
+    resp = redirect('/signout')
+    return resp
+
 @app.route('/cart',methods=['GET','POST'])
 def viewcart():
     if request.method == 'POST':
@@ -99,6 +106,15 @@ def profile():
         #reso - make_response(template.render(
         resp = render_template('profile.htm',details=info[0])
         #lines of text
+        return resp
+    else:
+        return redirect("/login")
+
+@app.route('/profile/<action>',methods=['GET','POST'])
+def profilechange(action):
+    if (action=='passwd'):
+        data = request.form.copy()
+
         return resp
     else:
         return redirect("/login")

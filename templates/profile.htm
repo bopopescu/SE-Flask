@@ -1,366 +1,133 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
     <title>Profile</title>
-
-<style>
-
-
-
-    body {
-
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-        background: lightgrey
-
-    }
-
-
-
-    img {
-
-        border-radius: 50%;
-
-        width:200px;
-
-    }
-
-
-
-    h1 {
-
-        font-weight: 500;
-
-    }
-
-    h2 {
-
-        display: inline;
-
-        font-weight: 300;
-
-    }
-
-
-
-    button {
-
-        padding-top: 5px;
-
-        padding-bottom: 5px;
-
-        border: none;
-
-        background: #353837;
-
-        color: white
-
-    }
-
-
-
-    .info {
-
-        padding-bottom: 10px
-
-    }
-
-
-
-    .box {
-
-        margin-top: 100px;
-
-        background:white;
-
-        width: 500px;
-
-        height: 500px;
-
-        padding: 70px;
-
-        margin-left: auto;
-
-        margin-right: auto;
-
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-    }
-
-
-
-    .editbtn {
-
-        box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-    }
-
-
-
-    .changebtn {
-
-        box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-    }
-
-
-
-    .deletebtn {
-
-        box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-    }
-
-
-
-    .book {
-
-        display:inline-block;
-
-        vertical-align:middle;
-
-        font-size:2em;
-
-        font-weight:bold;
-
-    }
-
-
-
-    .worm {
-
-        display:inline-block;
-
-        vertical-align:middle;
-
-        font-family:georgia;
-
-        font-style:italic;
-
-        font-size:2em;
-
-        padding:3px;
-
-        background:#fff;
-
-        top:0px;
-
-    }
-
-
-
-    .header{
-
-        position:fixed;
-
-        top:0px;
-
-        left:0px;
-
-        padding:10px;
-
-        width:100%;
-
-        height:6%;
-
-        z-index:1;
-
-        background:#dfdfdf;
-
-        overflow:none;
-
-        font-size:0.9em;
-
-        font-family:helvetica;
-
-        border-bottom:15px white solid;
-
-    }
-
-
-
-</style>
-
+<link rel="stylesheet" href = "http://jsmalls128.pythonanywhere.com/static/profileStyle.css">
 </head>
-
 <body>
 
-
-
 <div class = header>
-
-<span class="book"><a href="/">BOOK</a></span>
+<span class="book">BOOK</span>
 <span class="worm">Worm</span>
-
+<span class = "book"><img src ="https://images.emojiterra.com/mozilla/512px/1f41b.png" class = "wormImg" ></span>
 </div>
-
-
-
 
 
 <div class = box>
-
+<h1 align= center>{{error}}</h1>
 <h1 align = "center">Your Profile</h1>
 
-
-
 <div align = "center" class = profileImg>
-
-    <img src = "http://showbizy-dev.cygnismedia.com/images/default-user.png" alt = "Avatar">
-
+    <img src = "http://showbizy-dev.cygnismedia.com/images/default-user.png" alt = "Avatar" class = "profilePic">
 </div>
-
 <br>
-
-
-
 
 
 <div id="div1" align = "center" class = info>
-
-    <h2 id="f1">{{details['username']}}</h2>
-
+    <h2 id="f1">{{details.get("username")}}</h2>
     <br>
-
-    <h2 id="f2">{{details['name']}}</h2>
-
+    <h2 id="f2">{{details.get("name")}}</h2>
     <br>
-
-    <h2 id="f4">{{details['email']}}</h2>
-
+    <h2 id="f4">{{details.get("email")}}</h2>
+    <br><br>
 </div>
-
-
-
-    <div id="div2" align = "center" class = info style="display: none;">
-
-    <p><label>Old password:</label>
-
-           <input type="password" id="myPwd">
-
-        <br>
-
-        <label>New password:</label>
-
-           <input type="password" id="myPwd2">
-
-        </p>
-
-     <input type="checkbox" onclick="showPwd()">Show Passwords
-
-
-
-
-
-
-
-    </div>
-
-
-
-<br>
-
-
 
 <div align = "center" class = help>
-
     <button type = "submit" class = "editbtn" id="btn1" onclick="editText()">Edit Profile</button>
-
     <button type = "submit" class = "changebtn" id="btn2" onclick="changePwd()">Change Password</button>
+    <button type = "submit" class = "deletebtn" onclick="delAct()">Delete Account</button>
+</div>
 
-    <button type = "submit" class = "deletebtn">Delete Account</button>
-
+<div align = "center" id = "myAccount" class = "modal">
+    <div class = "modal-content">
+        <span class = "close" onclick = "closeWin()"> &times;
+        </span>
+        <br><br><br>
+        <h2>Are you sure you would like to delete your account?</h2>
+        <img src ="https://cdn.shopify.com/s/files/1/1061/1924/files/Crying_Face_Emoji.png?9898922749706957214" class = "sadFace">
+        <br><br>
+        <form action="/delete" method="post">
+                <input type="hidden" name="username" value="{{details.get("username")}}"/>
+                <button type="submit"><i class="fa fa-check"></i> Yes</button>
+        </form>
+        <div class = "divider"></div>
+        <button type = "submit" onclick = "closeWin()">No</button>
+    </div>
 </div>
 
 
+<div align = "center" id = "pwd" class = "modal">
+    <div class = "modal-content">
+        <span class = "close" onclick = "closeWin()"> &times;
+        <form action="/profile/passwd" method="post">
+        </span>
+        <br><br><br>
+        <h2>Change Password</h2>
+        <br><br><br>
+        <p>Old Password: </p>
+        <br><br>
+        <input type = "password" name="currentpasswd" id = "myPwd">
+        <br><br>
+        <p>New Password: </p>
+        <br><br>
+        <input type = "password" name="newpasswd" id = "myPwd2">
+        <br><br><br>
+        <input type="checkbox" onclick="showPwd()"><p>Show Characters</p>
+        <br><br><br>
+        <button type = "submit">Submit</button>
+        </form>
+        <div class = "divider"></div>
+        <button type = "submit" onclick = "closeWin()">Cancel</button>
+    </div>
+</div>
 
-
-
-    <script>
-
+<script>
     function editText() {
-
         document.getElementById("f1").contentEditable = true
-
          document.getElementById("f2").contentEditable = true
-
          document.getElementById("f4").contentEditable = true
-
         if(document.getElementById("btn1").innerHTML=="Edit Profile")
-
             document.getElementById("btn1").innerHTML = "Save Changes"
-
         else {
-
             document.getElementById("btn1").innerHTML = "Edit Profile"
-
             document.getElementById("f1").contentEditable = false
-
             document.getElementById("f2").contentEditable = false
-
             document.getElementById("f4").contentEditable = false
-
         }
-
     }
-
-
-
-    function changePwd() {
-
-         var x = document.getElementById("div1");
-
-        var y = document.getElementById("div2");
-
-        if (y.style.display === "none" && document.getElementById("btn2").innerHTML == "Change Password") {
-
-             document.getElementById("btn2").innerHTML = "Save Changes"
-
-            x.style.display = "none";
-
-            y.style.display = "block";
-
-        } else {
-
-            document.getElementById("btn2").innerHTML = "Change Password"
-
-            x.style.display = "block";
-
-            y.style.display = "none"
-
-        }
-
-    }
-
-
 
     function showPwd() {
-
         var x = document.getElementById("myPwd");
-
         var y = document.getElementById("myPwd2");
-
         if (x.type === "password") {
-
             x.type = "text";
-
             y.type = "text";
-
         } else {
-
             x.type = "password";
-
             y.type = "password";
-
         }
+    }
 
-}
+    var modal;
+
+    function delAct() {
+        modal = document.getElementById('myAccount');
+        modal.style.display = "block";
+    }
+
+    function changePwd() {
+        modal = document.getElementById('pwd');
+        modal.style.display = "block";
+    }
+
+    function closeWin() {
+        modal.style.display = "none";
+    }
+
 
 </script>
-</div>
-</body>
 
+</div>
+
+</body>
 </html>
