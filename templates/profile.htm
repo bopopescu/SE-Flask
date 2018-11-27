@@ -33,7 +33,7 @@
 </div>
 
 <div align = "center" class = help>
-    <button type = "submit" class = "editbtn" id="btn1" onclick="editText()">Edit Profile</button>
+    <button type = "submit" class = "editbtn" id="btn1" onclick="changeInfo()">Edit Profile</button>
     <button type = "submit" class = "changebtn" id="btn2" onclick="changePwd()">Change Password</button>
     <button type = "submit" class = "deletebtn" onclick="delAct()">Delete Account</button>
 </div>
@@ -81,6 +81,34 @@
         <button type = "submit" onclick = "closeWin()">Cancel</button>
     </div>
 </div>
+    
+<div align = "center" id = "accountInfo" class = "modal">
+    <div class = "modal-content">
+        <span class = "close" onclick = "closeWin()"> &times;
+        <form action="/profile/passwd" method="post">
+        </span>
+        <br><br><br>
+        <h2>Edit Profile</h2>
+        <br><br><br>
+        <p>Username: </p>
+        <br><br>
+        <input type = "username" name="newusername" id = "myUsername">
+        <br><br>
+        <p>Name: </p>
+        <br><br>
+        <input type = "name" name="newname" id = "myName">
+        <br><br>
+        <p>Email: </p>
+        <br><br>
+        <input type = "email" name="newemail" id = "myEmail">
+        <br><br>
+        <br>
+        <button type = "submit">Submit</button>
+        </form>
+        <div class = "divider"></div>
+        <button type = "submit" onclick = "closeWin()">Cancel</button>
+    </div>
+</div>
 
 <script>
     function editText() {
@@ -96,7 +124,6 @@
             document.getElementById("f4").contentEditable = false
         }
     }
-
     function showPwd() {
         var x = document.getElementById("myPwd");
         var y = document.getElementById("myPwd2");
@@ -108,24 +135,22 @@
             y.type = "password";
         }
     }
-
     var modal;
-
     function delAct() {
         modal = document.getElementById('myAccount');
         modal.style.display = "block";
     }
-
     function changePwd() {
         modal = document.getElementById('pwd');
         modal.style.display = "block";
     }
-
+    function changeInfo() {
+        modal = document.getElementById('accountInfo');
+        modal.style.display = "block";
+    }
     function closeWin() {
         modal.style.display = "none";
     }
-
-
 </script>
 
 </div>
