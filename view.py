@@ -68,12 +68,27 @@ def registrationConfirmation(user_email):
     msg.body = "http://jsmalls128.pythonanywhere.com/login"
     mail.send(msg)
 
-"""def orderConfirmation(user_email):
+def orderConfirmation(user_email, order):
     l = []
     l.append(user_email)
-    msg = Message('Confirmation Email', sender = 'group2emails6050@gmail.com', recipients = l)
-    msg.body = "http://jsmalls128.pythonanywhere.com/login"
-    mail.send(msg)"""
+    msg = Message('Order Confirmation Email', sender = 'group2emails6050@gmail.com', recipients = l)
+    for detail in order:
+        if detail == 'itemsList':
+            itemsString = ""
+            for item in order[detail]:
+                itemsString += "{}x {} - {}\n".format(str(item[0]['qty']), item[0]['title'], item[0]['author'])
+        elif detail == 'total':
+            total = "Total: ${}\n".format(order[detail])
+        elif detail == 'order_id':
+            order_id = "Order ID: {}\n".format(order[detail])
+        elif detail == 'order_date':
+            order_date = "Order Date: {}\n".format(order[detail])
+        elif detail == 'ship_add':
+            shipping = "Shipping Address: {}\n".format(order[detail])
+        elif detail == 'bill_add':
+            billing = "Billing Address: {}\n".format(order[detail])
+    msg.body = order_date + order_id + itemsString + total + shipping + billing
+    mail.send(msg)
 
 @app.route('/register', methods=['GET','POST'])
 def register():
@@ -214,18 +229,22 @@ def checkoutview():
         item,sub = ch.handle_cart('view',request.cookies.get('username'))
         info = handle_acc('profile',request.cookies.get('username'))
         empty = item
+        itemsList = list()
         for book in item:
             itemString += book['title']
+            itemsList.append(item)
         data = request.form.copy()
         data['customer_id'] = request.cookies.get('username')
         data['order_num'] = random.randint(100000000,999999999)
         data['order_id'] = data['customer_id'] + str(data['order_num'])
         data['order_date'] = str(date.today())
         data['ship_add'] = data.get("add1s") +" " +data.get("add2s") +" "+ data.get("citys")+", "+ data.get("states")+ " "+ data.get("zips")
-        data['total'] = sub
+        data['bill_add'] = data.get("add1") +" " +data.get("add2") +" "+ data.get("city")+", "+ data.get("state")+ " "+ data.get("zip")
+        data['itemsList'] = itemsList
         data['items'] = itemString
+        data['total'] = sub
         respo = make_response(render_template('confirm.htm',count=request.cookies.get('count'),items=item,subtotal=sub,details=info[0],conf_nmb=data['order_num'],date=data['order_date'],conf_id=data['order_id'],ship_add=data['ship_add']))
-        #orderConfirmation(info[0]['email'])
+        orderConfirmation(info[0]['email'], data)
         ch.handle_cart('checkout',data)
         for book in empty:
             cp.updateItem(request.cookies.get('username'),book['isbn'],0)
