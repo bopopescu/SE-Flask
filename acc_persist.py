@@ -57,6 +57,7 @@ def update_info(data):
     username = data['user']
     email = data['email']
     name = data['name']
+    password = data['password']
     query = "UPDATE accounts SET password = '"+ password +"', email = '" + email + "',name=  '"+ name +"', WHERE username='"+ username + "'"
     db.update(query)
 
