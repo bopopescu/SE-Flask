@@ -60,6 +60,7 @@ display:inline-block;
 vertical-align:middle;
 font-size:2em;
 font-weight:bold;
+text-decoration: none;
 }
 
 .wormImg {
@@ -91,6 +92,11 @@ overflow:none;
 font-size:0.9em;
 font-family:helvetica;
 background:#A7D5DC;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .modal {
