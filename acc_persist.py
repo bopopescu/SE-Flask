@@ -57,9 +57,7 @@ def update_info(data):
     username = data['user']
     email = data['email']
     name = data['name']
-    
-    #password = data['password'] password = '"+ password 
-    query = "UPDATE accounts SET email = '" + email + "',name=  '"+ name +"', WHERE username='"+ username + "'"
+    query = "UPDATE accounts SET email='{}', name='{}' WHERE username='{}'".format(email, name, username)
     db.update(query)
 
 def update_user(data): #contains dict of all user attributes?
