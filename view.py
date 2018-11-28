@@ -36,7 +36,7 @@ def register():
         acc = handle_acc('register',request.form.copy())
         if(acc == 1):
             return render_template('register.htm',error="This username has already been taken!")
-        return redirect("/")
+        return redirect("/registrationConfirmation")
     else:
         return render_template('register.htm',error="")
 
@@ -120,9 +120,9 @@ def profilechange(action):
             return redirect("/profile")
     elif (action=='info'):
         handle_acc('changeinfo', data)
-        return redirect("/profile")
+        return redirect("/profile.htm")
     elif (action=='sub'):
-        handle_acc('subscribe',)
+        handle_acc('subscribe', data)
         return redirect("/profile")
     else:
         return redirect("/login")
