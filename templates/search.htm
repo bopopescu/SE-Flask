@@ -42,7 +42,6 @@
 <div class="filler"></div>
     <div class="clearfix">
         {% for item in items:%}
-        <div class="container-bkgrd">
             <div class="img-container">
                 <a href="/b/?book={{item['isbn']}}">
                 <img src ={{item['pic_url']}} width ="200" height="300" style="width:100%;max-width:200px"></a><br>{{item['title']}}<br>{{item['author']}}<br>
@@ -50,8 +49,8 @@
             </div>
         {% endfor%}
     </div>
-
 </div>
+
 <script>
 function checkCookie() {
     account = document.getElementById("Sign-in");

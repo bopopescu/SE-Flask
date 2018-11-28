@@ -227,22 +227,26 @@
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body checkCookie();>
 <div id="nav">
         <span class="book"><a href="/" style="padding:0px 0px 0px 0px; color:black; background:none;">BOOK</a></span>
         <span class="worm">Worm</span>
         <span class = "book"><img src ="https://images.emojiterra.com/mozilla/512px/1f41b.png" class = "wormImg" ></span>
 
 		<div class="search">
-			<form class="rad" action="/search" method="post">
-	    		<input type="radio" name="cat" value="isbn" checked="checked"> ISBN
-				<input type="radio" name="cat" value="title"> Title
-				<input type="radio" name="cat" value="author"> Author
-				<input type="radio" name="cat" value="subject"> Subject
-			<input type="text" class="searchbar"  name="search" placeholder="Search..."></input><button type="submit" class="searchbtn"><i class="fa fa-search"></i></button> </form>
-		</div>
+            <form class="rad" action="/search" method="POST">
+              <input type="radio" name="radiobutton" value="isbn" checked="checked"> ISBN
+              <input type="radio" name="radiobutton" value="title"> Title
+              <input type="radio" name="radiobutton" value="author"> Author
+              <input type="radio" name="radiobutton" value="subject"> Subject
+              <input type="text" required class="searchbar"  name="search" placeholder="Search...">
+              <button type="submit" class="searchbtn" value="Submit">
+              <i class="fa fa-search"></i>
+              </button>
+            </form>
+  </div>
 
-		<div class="menu">
+  <div class="menu">
 			<a href="/cart">cart ({{count}}) <i class="fa fa-shopping-cart"></i></a>
 			<a href="/checkout">checkout</a>
 		    <ul>
@@ -275,6 +279,7 @@
 </div>
 
 <script>
+
   function checkCookie() {
     account = document.getElementById("Sign-in");
     account = account.innerHTML

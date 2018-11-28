@@ -12,9 +12,14 @@ def getBookLowInv():
     query = 'select * from books where amount <= 10'
     return db.select(query)[0]
 
+def getDailySale(data):
+    query = "select * from orders where order_date='{}'".format(data)
+    return db.select(query)[0]
+
 def checkoutBook(isbn):
     query = 'update books SET amount=amount-1 where isbn = \'' + isbn + '\''
     db.update(query)
+
 def addBook(data):
     title = data['title']
     author = data['author']
@@ -51,5 +56,5 @@ def updateBook(data):
     db.update(query)
 
 def getAll():
-    query= 'select * from books'
+    query= 'select * from books ORDER BY title'
     return db.select(query)[0]

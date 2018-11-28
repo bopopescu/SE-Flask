@@ -1,0 +1,14 @@
+Order Confirmation
+ Your order was successfully processed! Here is a confirmation of your recent order:
+        Customer Name: {{details.get("name")}}
+        Confirmation Number: {{conf_numb}}
+        Order ID: {{conf_id}}
+        Order Date: {{date}}
+        Shipping Address: {{ship_add}}
+        Ordered Item(s):
+        {% for item in items:%}
+            {{item['title']}}
+            {{item['total']}}
+        {%endfor%}
+
+        Order Total: ${{subtotal}}

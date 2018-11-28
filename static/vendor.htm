@@ -4,16 +4,11 @@
   <title> Books Database </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <style type="text/css">
-    body{
-			font-family:helvetica;
-			font-size:0.9em;
-			padding:0px;
-			margin:0px;
-			height:100%;
-			background:white;
-			padding:0 20% 2% 20%;
-		}
+   <style type="text/css">
+        body{
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: lightgrey
+        }
 		h1{
 			text-transform:uppercase;
 			color:#505050;
@@ -30,36 +25,43 @@
 			border:1px #bfbfbf solid;
 			border-top:none;
 		}
-		.book{
-			display:inline-block;
-			vertical-align:middle;
-			font-size:2em;
-			font-weight:bold;
-		}
-		.worm{
-			display:inline-block;
-			vertical-align:middle;
-			font-family:georgia;
-			font-style:italic;
-			font-size:2em;
-			padding:3px;
-			background:#fff;
-			top:0px;
-		}
-		#nav{
-			position:fixed;
-			top:0px;
-			left:0px;
-			padding:10px;
-			width:100%;
-			height:6%;
-			z-index:1;
-			background:#dfdfdf;
-			overflow:none;
-			font-size:0.9em;
-			font-family:helvetica;
-			border-bottom:1px #999 solid;
-		}
+
+        .book{
+        display:inline-block;
+        vertical-align:middle;
+        font-size:2em;
+        font-weight:bold;
+        }
+
+        .worm{
+        display:inline-block;
+        vertical-align:middle;
+        font-family:georgia;
+        font-style:italic;
+        font-size:2em;
+        padding:3px;
+        background:#fff;
+        top:0px;
+        }
+
+        .wormImg {
+        width: 40px;
+        padding-left: 5px;
+        }
+
+        #nav{
+        position:fixed;
+        top:0px;
+        left:0px;
+        padding:20px;
+        width:100%;
+        height:6%;
+        z-index:1;
+        overflow:none;
+        font-size:0.9em;
+        font-family:helvetica;
+        background:#A7D5DC;
+        }
 		#nav ul{
 			list-style-type:none;
 			display:inline;
@@ -106,59 +108,31 @@
 		.top:hover .drop{
 			display:block;
 		}
-		.search{
-			display:inline;
-			float:left;
-			margin-top:0.2%;
-			width:50%;
-		}
-		.rad{
-			display:inline;
-			background:#000;
-			color:#FFF;
-			font-size:1em;
-			font-weight:bold;
-			padding:8px 5px 8px 5px;
-		}
-		.searchbtn{
-			padding:8px;
-			border:none;
-			background: #000;
-			margin:0px;
-		}
-		.searchbtn:hover{
-			background:#999;
-		}
-		.fa-search{
-			color:white;
-		}
-		.searchbar{
-			width:40%;
-			padding: 6px;
-			font-weight:bold;
-			font-size:13px;
-		}
 		.menu{
-			float:right;
-			margin-right:3%;
-		}
-		.filler{
-			padding-top:6%;
-			background:#fff;
-		}
-		#container{
-			overflow:auto;
-			height:100%;
-			background:#fff;
-			padding:0 20% 2% 20%;
-		}
-		.input-table tr {border: solid white 5px}
+            float:right;
+            margin-right:3%;
+        }
+        .box {
+            margin-top: 100px;
+            background:white;
+            width: 500px;
+            height: 400px;
+            padding: 70px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 150px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+	.input-table tr {border: solid white 5px}
     .input-table-form {border: 5px solid white}
     .input-table table {border: solid black 2px}
     .input-table td {border: solid white 2px}
+
     .button-table {}
     .button-table td {border: solid white 5px; background: white;}
+
     .book-information-box {border: solid white 5px; padding: 10px; background: white; height: 19px}
+
     .body {border: solid white 5px;}
     .div-book-table {padding: 5px;}
     .book-table table {border: solid white 5px; background:white; padding: 20px}
@@ -167,27 +141,27 @@
     </style>
 </head>
 <body>
-  <div id="nav">
-    <div align="center"><span class="book">BOOK</span>
-      <span class="worm">Worm</span>
+ <div id="nav">
+    <span class="book">BOOK</span>
+         <span class="worm">Worm</span>
+         <span class = "book"><img src ="https://images.emojiterra.com/mozilla/512px/1f41b.png" class = "wormImg"></span>
       <div class="menu">
         <ul>
           <div class="top">
             <li>
-              <a href="">account<i class="fa fa-sort-down"></i></a>
+              <a href="">Account<i class="fa fa-sort-down"></i></a>
             </li>
             <div class="drop">
-              <li><a href="/signout">sign out</a></li>
+              <li><a href="/signout">Sign Out</a></li>
             </div>
           </div>
         </ul>
       </div>
     </div>
-  </div>
-  <div class="filler"></div>
-	<div id="container" align="center">
-	  <h1>Book Database</h1>
-  </div>
+
+<div class = box align = center>
+<h1>Book Database</h1>
+
 <form action="/vendor" method="POST">
   <table class="input-table" id="input-table">
     <tr>
@@ -221,6 +195,7 @@
       <td><input name="price" placeholder="Enter Price"></td>
     </tr>
   </table>
+  <br><br>
   <table class="button-table" id="button-table">
     <tr>
       <input type="radio" name="radiobutton" value="add" checked="checked"> Add book
@@ -230,6 +205,7 @@
     <button type="submit" class="searchbtn" value="Submit">Submit
   </table>
   </form>
+  </div>
 </body>
 <foot>
 </foot>

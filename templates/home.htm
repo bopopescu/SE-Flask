@@ -38,7 +38,6 @@
     float: left;
     width: 19%;
     padding: 5px;
-    background: white;
 }
 
 .clearfix::after {
@@ -84,8 +83,8 @@
 
 <div class="filler"></div>
 
-  <div class="clearfix">
-  % for president in presidents:
+<div class="clearfix">
+    % for president in presidents:
     <div class="img-container">
       <a href=localhost/?book=${president.get("isbn")}>
       <img src =${president['pic_url']} width ="200" height="300" style="width:100%;max-width:200px"></a><br>${president['title']}<br>${president['author']}<br>
@@ -93,6 +92,7 @@
     </div>
     % endfor
 </div>
+
 <a href="?update=1">Changing the price</a>
 
 

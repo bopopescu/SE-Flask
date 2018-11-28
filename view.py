@@ -32,7 +32,7 @@ def bookview():
         if(acc_type == 'customer'):
             resp = render_template('index.htm',p=pres,user=request.cookies.get('username'),count=request.cookies.get('count'),log="Logout")
         elif(acc_type == 'owner'):
-            resp = redirect('http://jsmalls128.pythonanywhere.com/static/ownerMainPage.htm')
+            resp = redirect('/owner')
         elif(acc_type == 'vendor'):
             resp = redirect('/vendor')
         elif(acc_type == 'admin'):
@@ -44,12 +44,36 @@ def bookview():
         resp = make_response(render_template('index.htm',p=books,user='Account',count=0,log="Login"))
     return resp
 
+@app.route('/owner', methods=['GET'])
+def ownerView():
+    resp = ''
+    resp = redirect('http://jsmalls128.pythonanywhere.com/static/ownerMainPage.htm')
+    return resp
+
+@app.route('/owner/<report>', methods=['GET'])
+def ownerViewSelection(report):
+    resp = ''
+    if(report == 'daily'):
+        dictlist = bh.handle_book('dailySale',str(date.today()))
+        resp = make_response(render_template('endOfDaySales.htm',items=dictlist,date=str(date.today())))
+    elif(report == 'inventory'):
+        dictlist = bh.handle_book('lowInv','0')
+        resp = make_response(render_template('lowInventory.htm',items=dictlist,date=str(date.today())))
+    return resp
+
 def registrationConfirmation(user_email):
     l = []
     l.append(user_email)
     msg = Message('Verification Email', sender = 'group2emails6050@gmail.com', recipients = l)
     msg.body = "http://jsmalls128.pythonanywhere.com/login"
     mail.send(msg)
+
+"""def orderConfirmation(user_email):
+    l = []
+    l.append(user_email)
+    msg = Message('Confirmation Email', sender = 'group2emails6050@gmail.com', recipients = l)
+    msg.body = "http://jsmalls128.pythonanywhere.com/login"
+    mail.send(msg)"""
 
 @app.route('/register', methods=['GET','POST'])
 def register():
@@ -139,7 +163,7 @@ def profilechange(action):
             return redirect("/profile")
     elif (action=='info'):
         handle_acc('changeinfo', data)
-        return redirect("/profile")
+        return redirect("/signout")
     elif (action=='sub'):
         handle_acc('subscribe', data)
         return redirect("/profile")
@@ -201,6 +225,7 @@ def checkoutview():
         data['total'] = sub
         data['items'] = itemString
         respo = make_response(render_template('confirm.htm',count=request.cookies.get('count'),items=item,subtotal=sub,details=info[0],conf_nmb=data['order_num'],date=data['order_date'],conf_id=data['order_id'],ship_add=data['ship_add']))
+        #orderConfirmation(info[0]['email'])
         ch.handle_cart('checkout',data)
         for book in empty:
             cp.updateItem(request.cookies.get('username'),book['isbn'],0)

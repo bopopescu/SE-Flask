@@ -17,6 +17,8 @@ def handle_book(case,data):
         return bp.getAll()
     elif case == 'lowInv':
         return bp.getBookLowInv()
+    elif case == 'dailySale':
+        return bp.getDailySale(data)
 
 res = handle_book('home','')
 for i in res:
