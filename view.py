@@ -101,12 +101,8 @@ def search():
 @app.route('/profile',methods=['GET','POST'])
 def profile():
     if (request.cookies.get('username') != None):
-        template = Template(r'D:\bookworm\templates\profile.htm')
         info = handle_acc('profile',request.cookies.get('username'))
-        #reso - make_response(template.render(
-        resp = render_template('profile.htm',details=info[0])
-        #lines of text
-        return resp
+        return render_template('profile.htm',details=info[0])
     else:
         return redirect("/login")
 
@@ -120,7 +116,7 @@ def profilechange(action):
             return redirect("/profile")
     elif (action=='info'):
         handle_acc('changeinfo', data)
-        return redirect("/profile.htm")
+        return redirect("/profile")
     elif (action=='sub'):
         handle_acc('subscribe', data)
         return redirect("/profile")
