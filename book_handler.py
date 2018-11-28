@@ -11,9 +11,12 @@ def handle_book(case,data):
         bp.deleteBook(data)
     elif case == 'update':
         bp.updateBook(data)
+    elif case == 'checkout':
+        bp.checkoutBook(data)
     elif case == 'home':
         return bp.getAll()
-
+    elif case == 'lowInv':
+        return bp.getBookLowInv()
 
 res = handle_book('home','')
 for i in res:

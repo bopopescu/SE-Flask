@@ -11,6 +11,12 @@ def getNumItems(user): #used to set number in cookie to show beside the cart lin
         return 0 #if no items in cart
 #returns number of items in cart
 
+def checkout(data):
+    order_num = str(data['order_num'])
+    total = str(data['total'])
+    query =  'insert into orders(customer_id,order_num,order_id,order_date,ship_add,total,items) values (\'' + data['customer_id'] + '\',\'' + order_num + '\',\'' + data['order_id'] + '\',\'' + data['order_date'] + '\',\'' + data['ship_add'] + '\',\'' + total + '\',\'' + data['items'] + '\')'
+    db.update(query)
+
 def addItem(user,isbn): #or just send both in dict or list
     #if first time putting item in cart
     query =  'insert into cart(cust_id,isbn,qty) values (\'' + user + '\',\'' + isbn + '\',1)'

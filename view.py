@@ -2,11 +2,25 @@ from mako.template import Template
 from acc_handler import *
 import cart_handler as ch
 import book_handler as bh
+import cart_persist as cp
+from datetime import date
+import random
 from flask import request,redirect,make_response
 from flask import render_template
-
 from flask import Flask
+from flask_mail import Mail, Message
+
+
 app = Flask(__name__)
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USERNAME'] = 'group2emails6050@gmail.com'
+app.config['MAIL_PASSWORD'] = '#6050project'
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+
+mail = Mail(app)
+mail.connect()
 
 # Home page view
 @app.route('/',methods=['GET'])
@@ -30,13 +44,22 @@ def bookview():
         resp = make_response(render_template('index.htm',p=books,user='Account',count=0,log="Login"))
     return resp
 
+def registrationConfirmation(user_email):
+    l = []
+    l.append(user_email)
+    msg = Message('Verification Email', sender = 'group2emails6050@gmail.com', recipients = l)
+    msg.body = "http://jsmalls128.pythonanywhere.com/login"
+    mail.send(msg)
+
 @app.route('/register', methods=['GET','POST'])
 def register():
     if(request.method == 'POST'):
         acc = handle_acc('register',request.form.copy())
         if(acc == 1):
             return render_template('register.htm',error="This username has already been taken!")
-        return redirect("/registrationConfirmation")
+
+        registrationConfirmation(request.form.copy()['email'])
+        return redirect("http://jsmalls128.pythonanywhere.com/static/registrationConfirmation.htm")
     else:
         return render_template('register.htm',error="")
 
@@ -157,6 +180,41 @@ def vendorviewselection():
             resp = render_template('manageBooks.htm',Confirmation="Book updated!")
     else:
         resp = redirect('/static/vendor.htm')
+    return resp
+
+@app.route('/checkout', methods=['GET','POST'])
+def checkoutview():
+    resp = redirect("/cart")
+    if(request.method == 'POST'):
+        itemString =""
+        item,sub = ch.handle_cart('view',request.cookies.get('username'))
+        info = handle_acc('profile',request.cookies.get('username'))
+        empty = item
+        for book in item:
+            itemString += book['title']
+        data = request.form.copy()
+        data['customer_id'] = request.cookies.get('username')
+        data['order_num'] = random.randint(100000000,999999999)
+        data['order_id'] = data['customer_id'] + str(data['order_num'])
+        data['order_date'] = str(date.today())
+        data['ship_add'] = data.get("add1s") +" " +data.get("add2s") +" "+ data.get("citys")+", "+ data.get("states")+ " "+ data.get("zips")
+        data['total'] = sub
+        data['items'] = itemString
+        respo = make_response(render_template('confirm.htm',count=request.cookies.get('count'),items=item,subtotal=sub,details=info[0],conf_nmb=data['order_num'],date=data['order_date'],conf_id=data['order_id'],ship_add=data['ship_add']))
+        ch.handle_cart('checkout',data)
+        for book in empty:
+            cp.updateItem(request.cookies.get('username'),book['isbn'],0)
+            bh.handle_book('checkout',book['isbn'])
+        respo.set_cookie('count',str(0))
+        return respo
+        #Should take input from form and put into order object
+    else:
+        if int(request.cookies.get('count')) != 0:
+            item,sub = ch.handle_cart('view',request.cookies.get('username'))
+            return render_template('checkout.htm',count=request.cookies.get('count'),items=item,subtotal=sub)
+        else:
+            return redirect('/cart')
+        resp =  redirect('static/checkoutproto.htm')
     return resp
 
 @app.route('/admin/<action>', methods=['GET','POST'])

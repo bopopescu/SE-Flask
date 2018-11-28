@@ -3,6 +3,8 @@ import cart_persist as cp
 def handle_cart(case,data):
     if case == 'count':
         return cp.getNumItems(data)
+    if case == 'checkout':
+        cp.checkout(data)
     if case == 'view':
         books = cp.getItems(data)
         subtotal = 0

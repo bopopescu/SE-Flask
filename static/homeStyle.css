@@ -238,7 +238,7 @@ padding:8px;
 
 border:none;
 
-background: #000;	
+background: #000;
 
 margin:0px;
 
@@ -334,6 +334,8 @@ width: 19%;
 
 padding: 5px;
 
+background: white;
+
 }
 
 
@@ -380,7 +382,7 @@ width: 1%;
 
 height:10px;
 
-background-color: #91E1BE; 
+background-color: #91E1BE;
 
 }
 
@@ -424,7 +426,7 @@ padding: 20px;
 
 width: 40%;
 
-height: 50%; 
+height: 50%;
 
 margin-top: 150px;
 

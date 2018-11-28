@@ -7,6 +7,14 @@ def getSearch(data):
 def getBook(isbn):
     query = 'select * from books where isbn = \'' + isbn + '\''
     return db.select(query)[0]
+
+def getBookLowInv():
+    query = 'select * from books where amount <= 10'
+    return db.select(query)[0]
+
+def checkoutBook(isbn):
+    query = 'update books SET amount=amount-1 where isbn = \'' + isbn + '\''
+    db.update(query)
 def addBook(data):
     title = data['title']
     author = data['author']
@@ -20,12 +28,14 @@ def addBook(data):
     vendor = data['vendor']
     query = "INSERT INTO books() VALUES('"+subject+"','"+title+"','"+ isbn + "','"+author+"','"+ detail +"',"+ price +",'"+pic_url+"',"+promo+","+amount+","+vendor+")"
     db.update(query)
+
 def deleteBook(data):
     title = data['title']
     author = data['author']
     isbn = data['isbn']
     query = "DELETE from books WHERE title='"+ title +"' AND author='"+ author +"' AND isbn='" + isbn + "'"
     db.update(query)
+
 def updateBook(data):
     title = data['title']
     author = data['author']
