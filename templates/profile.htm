@@ -7,9 +7,9 @@
 <body>
 
 <div class = header>
-<span class="book">BOOK</span>
+<a href="/"><span class="book">BOOK</span>
 <span class="worm">Worm</span>
-<span class = "book"><img src ="https://images.emojiterra.com/mozilla/512px/1f41b.png" class = "wormImg" ></span>
+<span class = "book"><img src ="https://images.emojiterra.com/mozilla/512px/1f41b.png" class = "wormImg" ></span><a>
 </div>
 
 
@@ -44,23 +44,23 @@
         </span>
         <br><br><br>
         <h2>Are you sure you would like to delete your account?</h2>
+        <br>
         <img src ="https://cdn.shopify.com/s/files/1/1061/1924/files/Crying_Face_Emoji.png?9898922749706957214" class = "sadFace">
         <br><br>
         <form action="/delete" method="post">
-                <input type="hidden" name="username" value="{{details.get("username")}}"/>
-                <button type="submit"><i class="fa fa-check"></i> Yes</button>
+            <input type="hidden" name="username" value="{{details.get("username")}}"/>
+            <button type="submit"><i class="fa fa-check"></i> Yes</button>
+            <br><br>
         </form>
-        <div class = "divider"></div>
-        <button type = "submit" onclick = "closeWin()">No</button>
+        <button onclick = "closeWin()">No</button>
     </div>
 </div>
-
 
 <div align = "center" id = "pwd" class = "modal">
     <div class = "modal-content">
         <span class = "close" onclick = "closeWin()"> &times;
+        </span>
         <form action="/profile/passwd" method="post">
-            </span>
             <br><br><br>
             <h2>Change Password</h2>
             <br><br><br>
@@ -76,54 +76,38 @@
             <input type="checkbox" onclick="showPwd()"><p>Show Characters</p>
             <br><br><br>
             <button type = "submit">Submit</button>
+            <br><br>
         </form>
-        <div class = "divider"></div>
-        <button type = "submit" onclick = "closeWin()">Cancel</button>
+        <button onclick = "closeWin()">Cancel</button>
     </div>
 </div>
-    
+
 <div align = "center" id = "accountInfo" class = "modal">
     <div class = "modal-content">
         <span class = "close" onclick = "closeWin()"> &times;
-        <form action="/profile/info" method="post">
         </span>
+        <form action="/profile/info" method="POST">
         <br><br><br>
         <h2>Edit Profile</h2>
         <br><br><br>
-        <p>Username: </p>
-        <br><br>
-        <input type = "username" name="newusername" id = "myUsername">
-        <br><br>
+        <input type = "hidden" name="user" value="{{details.get("username")}}">
         <p>Name: </p>
         <br><br>
-        <input type = "name" name="newname" id = "myName">
+        <input type = "text" name="name">
         <br><br>
         <p>Email: </p>
         <br><br>
-        <input type = "email" name="newemail" id = "myEmail">
+        <input type = "text" name="email">
         <br><br>
         <br>
         <button type = "submit">Submit</button>
+        <br><br>
         </form>
-        <div class = "divider"></div>
         <button type = "submit" onclick = "closeWin()">Cancel</button>
     </div>
 </div>
 
 <script>
-    function editText() {
-        document.getElementById("f1").contentEditable = true
-         document.getElementById("f2").contentEditable = true
-         document.getElementById("f4").contentEditable = true
-        if(document.getElementById("btn1").innerHTML=="Edit Profile")
-            document.getElementById("btn1").innerHTML = "Save Changes"
-        else {
-            document.getElementById("btn1").innerHTML = "Edit Profile"
-            document.getElementById("f1").contentEditable = false
-            document.getElementById("f2").contentEditable = false
-            document.getElementById("f4").contentEditable = false
-        }
-    }
     function showPwd() {
         var x = document.getElementById("myPwd");
         var y = document.getElementById("myPwd2");
